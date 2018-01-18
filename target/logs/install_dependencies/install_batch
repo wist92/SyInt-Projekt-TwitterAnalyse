@@ -1,9 +1,0 @@
-Collecting mockito
-  Downloading mockito-1.0.12.tar.gz
-Building wheels for collected packages: mockito
-  Running setup.py bdist_wheel for mockito: started
-  Running setup.py bdist_wheel for mockito: finished with status 'done'
-  Stored in directory: C:\Users\Dell Pc\AppData\Local\pip\Cache\wheels\6c\02\3d\b2dc8064a2d04722adf50a9bb25b5d963359b027af49f6522a
-Successfully built mockito
-Installing collected packages: mockito
-Successfully installed mockito-1.0.12
