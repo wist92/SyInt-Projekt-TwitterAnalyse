@@ -10,7 +10,6 @@ access_token_secret = ""
 consumer_key = ""
 consumer_secret = ""
 
-
 # This is a basic listener that just prints received tweets to stdout.
 class StdOutListener(StreamListener):
     def __init__(self, time_limit=10):

@@ -1,13 +1,21 @@
-alert("gut");
-function test(){
-         const req = new XMLHttpRequest();
-
+function HichartStad(){
+    var dataObject ;
+    var nameland = [];
+    var valeurhastag = [];
+    const req = new XMLHttpRequest();
         req.onreadystatechange = function(event) {
-            // XMLHttpRequest.DONE === 4
-            //this.responseType = 'json';
             if (this.readyState === XMLHttpRequest.DONE) {
                 if (this.status === 200) {
-                     console.log("Réponse reçue: %s",this.responseText);
+                    dataObject = JSON.parse(this.responseText);
+                    for (var i = 0; i < dataObject.length; i++) {
+                        name = JSON.stringify(dataObject[i]['full_name']);
+                        name = name.replace(/"/g,'');
+                         nameland.push(name);
+                         valeurhastag.push(parseFloat(JSON.stringify(dataObject[i]['ftCount'])));
+                     }
+                    console.log(nameland);
+                    console.log(valeurhastag);
+
                 } else {
                     console.log("Status de la réponse: %d (%s)", this.status, this.statusText);
                 }
@@ -18,18 +26,18 @@ function test(){
         req.send(null);
 
 
-       }
 
-function Hichart(){        
         var canvas = document.getElementById('barChart');
         var ctxB = canvas.getContext('2d');
         var myBarChart = new Chart(ctxB, {
               type: 'bar',
               data: {
-                labels: ["Berlin", "Paris", "NewYork", "Yaounde", "Syngapur", "Changai"],
+                //labels: ["Berlin", "Paris", "NewYork", "Yaounde", "Syngapur", "Changai"],
+                  labels: nameland,
                 datasets: [{
-                    label: 'Kurve',
-                    data: [500, 700, 250, 100, 50, 96],
+                    label: 'Ursprungliche Länder',
+                    //data: [500, 700, 250, 100, 50, 96],
+                    data: valeurhastag,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -58,6 +66,6 @@ function Hichart(){
                     }]
                 }
               }
+
         });
-      test();
     }

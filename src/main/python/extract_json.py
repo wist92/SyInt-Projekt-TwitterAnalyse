@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 
 def import_twitter_data(path):
-    print('Import file %s' %path)
+    print('Import file %s' % path)
     tweets_data = []
     tweets_file = open(path, "r")
     for line in tweets_file:
@@ -43,7 +43,7 @@ def extract_data(path_to_json_file):
     ax.tick_params(axis='x', labelsize=15)
     ax.tick_params(axis='y', labelsize=10)
     ax.set_xlabel('Languages', fontsize=15)
-    ax.set_ylabel('Number of tweets' , fontsize=15)
+    ax.set_ylabel('Number of tweets', fontsize=15)
     ax.set_title('Top 5 languages', fontsize=15, fontweight='bold')
     tweets_by_lang[:5].plot(ax=ax, kind='bar', color='red')
     plt.tight_layout()
@@ -53,7 +53,7 @@ def extract_data(path_to_json_file):
     ax.tick_params(axis='x', labelsize=15)
     ax.tick_params(axis='y', labelsize=10)
     ax.set_xlabel('Countries', fontsize=15)
-    ax.set_ylabel('Number of tweets' , fontsize=15)
+    ax.set_ylabel('Number of tweets', fontsize=15)
     ax.set_title('Top 5 countries', fontsize=15, fontweight='bold')
     tweets_by_country[:5].plot(ax=ax, kind='bar', color='blue')
     plt.tight_layout()
@@ -63,7 +63,7 @@ def extract_data(path_to_json_file):
     ax.tick_params(axis='x', labelsize=15)
     ax.tick_params(axis='y', labelsize=10)
     ax.set_xlabel('Hashtags', fontsize=15)
-    ax.set_ylabel('Number of tweets' , fontsize=15)
+    ax.set_ylabel('Number of tweets', fontsize=15)
     if len(tweets_by_hashtag) < 5:
         title = format('Top %d hashtags' % tweets_by_hashtag)
         ax.set_title(title, fontsize=15, fontweight='bold')
