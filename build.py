@@ -9,6 +9,8 @@ use_plugin("python.distutils")
 
 default_task = "publish"
 
+
 @init
 def initialize(project):
-	project.build_depends_on('mockito');
+    project.set_property("coverage_break_build", False)
+    project.build_depends_on('mockito');

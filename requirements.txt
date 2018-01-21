@@ -1,3 +1,8 @@
+requests
+PIL
+boto3
+botocore
+bottle
 tweepy
 matplotlib
 pandas
