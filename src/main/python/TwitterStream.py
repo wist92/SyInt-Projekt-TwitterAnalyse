@@ -10,7 +10,6 @@ access_token_secret = "AR94TILL9Imk7YXKCX4RC9GX7pt6kBbur0rll013PHBR9"
 consumer_key = "iInr1a3dPbgH5Mkqi9fmZRy6u"
 consumer_secret = "XHkYBQB2wCin0UzyDjl2qEKYnIGjTyPFcdvRNI3wiMDWX5P6So"
 
-
 # This is a basic listener that just prints received tweets to stdout.
 class StdOutListener(StreamListener):
     def __init__(self, time_limit=10, file_name='twitter_data.txt'):
