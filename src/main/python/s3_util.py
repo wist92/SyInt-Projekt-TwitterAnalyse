@@ -1,12 +1,13 @@
 import boto3
 
+aws_access_key_id = ''
+aws_secret_access_key = ''
+
 
 def push_to_s3(countries_file, hashtags_file, lang_file):
-    aws_access_key_id = ''
-    aws_secret_access_key = ''
-    bucket = 'TwitterAnalysis'
+    bucket = 'TwitterAnalysisHVSGBJSG'
     s3 = boto3.client('s3', aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key)
-    s3.create_bucket(Bucket='TwitterAnalysis')
+    s3.create_bucket(Bucket=bucket)
     s3.upload_file(countries_file, bucket, countries_file)
     s3.upload_file(hashtags_file, bucket, hashtags_file)
     s3.upload_file(lang_file, bucket, lang_file)
