@@ -2,7 +2,6 @@ import json
 import pandas as pd
 import matplotlib.pyplot as plt
 from src.main.python.s3_util import push_to_s3
-from src.main.python.dbHandler import *
 
 
 def import_twitter_data(path):
@@ -17,6 +16,25 @@ def import_twitter_data(path):
             continue
     tweets_file.close()
     return tweets_data
+
+
+def create_plot(tweets_series,title, path):
+    fig, ax = plt.subplots()
+    ax.tick_params(axis='x', labelsize=15)
+    ax.tick_params(axis='y', labelsize=10)
+    ax.set_xlabel('Countries', fontsize=15)
+    ax.set_ylabel('Number of tweets', fontsize=15)
+    if len(tweets_series) < 5:
+        title = 'Top %d %s' % len(tweets_series) % title
+        ax.set_title(title, fontsize=15, fontweight='bold')
+        tweets_series[:len(tweets_series)].plot(ax=ax, kind='bar', color='blue')
+    else:
+        title = title = 'Top 5 %s' % title
+        ax.set_title(title, fontsize=15, fontweight='bold')
+        tweets_series[:5].plot(ax=ax, kind='bar', color='blue')
+    plt.tight_layout()
+    file_name = path + '_top_%s.png' % title
+    plt.savefig(file_name)
 
 
 def extract_data(path_to_json_file):
@@ -41,48 +59,14 @@ def extract_data(path_to_json_file):
     tweets_by_hashtag = hashtags['tags'].value_counts()
     tweets_by_country = tweets['country'].value_counts()
 
-    fig, ax = plt.subplots()
-    ax.tick_params(axis='x', labelsize=15)
-    ax.tick_params(axis='y', labelsize=10)
-    ax.set_xlabel('Languages', fontsize=15)
-    ax.set_ylabel('Number of tweets' , fontsize=15)
-    ax.set_title('Top 5 languages', fontsize=15, fontweight='bold')
-    tweets_by_lang[:5].plot(ax=ax, kind='bar', color='red')
-    plt.tight_layout()
-    plt.savefig(path_to_json_file + '_top_languages.png')
-
-    fig, ax = plt.subplots()
-    ax.tick_params(axis='x', labelsize=15)
-    ax.tick_params(axis='y', labelsize=10)
-    ax.set_xlabel('Countries', fontsize=15)
-    ax.set_ylabel('Number of tweets' , fontsize=15)
-    if len(tweets_by_country) < 5:
-        title = 'Top %d countries' % len(tweets_by_country)
-        ax.set_title(title, fontsize=15, fontweight='bold')
-        tweets_by_country[:len(tweets_by_country)].plot(ax=ax, kind='bar', color='blue')
-    else:
-        ax.set_title('Top 5 countries', fontsize=15, fontweight='bold')
-        tweets_by_country[:5].plot(ax=ax, kind='bar', color='blue')
-    plt.tight_layout()
-    plt.savefig(path_to_json_file + '_top_countries.png')
-
-    fig, ax = plt.subplots()
-    ax.tick_params(axis='x', labelsize=15)
-    ax.tick_params(axis='y', labelsize=10)
-    ax.set_xlabel('Hashtags', fontsize=15)
-    ax.set_ylabel('Number of tweets' , fontsize=15)
-    if len(tweets_by_hashtag) < 5:
-        title = 'Top %d hashtags' % len(tweets_by_hashtag)
-        ax.set_title(title, fontsize=15, fontweight='bold')
-        tweets_by_hashtag[:len(tweets_by_hashtag)].plot(ax=ax, kind='bar', color='blue')
-    else:
-        ax.set_title('Top 5 hashtags', fontsize=15, fontweight='bold')
-        tweets_by_hashtag[:5].plot(ax=ax, kind='bar', color='blue')
-    plt.tight_layout()
-    plt.savefig(path_to_json_file + '_top_hashtags.png')
+    create_plot(tweets_series=tweets_by_country,title='countries',path=path_to_json_file)
+    create_plot(tweets_series=tweets_by_hashtag,title='hashtags',path=path_to_json_file)
+    create_plot(tweets_series=tweets_by_lang, title='languages', path=path_to_json_file)
 
     # Push most used Hashtag and Country to DB
     print("Writing into database...")
+    from src.main.python.dbHandler import dbHandler
+
     db = dbHandler()
     db.setData(session=str(path_to_json_file), hashtag=str(tweets_by_hashtag.index[0]), location=str(tweets_by_country.index[0]))
     db.getAll()
