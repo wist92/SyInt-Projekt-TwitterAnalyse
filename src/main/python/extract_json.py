@@ -25,12 +25,12 @@ def create_plot(tweets_series,title, path):
     ax.set_xlabel('Countries', fontsize=15)
     ax.set_ylabel('Number of tweets', fontsize=15)
     if len(tweets_series) < 5:
-        title = 'Top %d %s' % len(tweets_series) % title
-        ax.set_title(title, fontsize=15, fontweight='bold')
+        plot_title = 'Top %d %s' % (len(tweets_series), title)
+        ax.set_title(plot_title, fontsize=15, fontweight='bold')
         tweets_series[:len(tweets_series)].plot(ax=ax, kind='bar', color='blue')
     else:
-        title = title = 'Top 5 %s' % title
-        ax.set_title(title, fontsize=15, fontweight='bold')
+        plot_title = 'Top 5 %s' % title
+        ax.set_title(plot_title, fontsize=15, fontweight='bold')
         tweets_series[:5].plot(ax=ax, kind='bar', color='blue')
     plt.tight_layout()
     file_name = path + '_top_%s.png' % title
