@@ -1,10 +1,11 @@
 import unittest
 import os.path
-from util import delete_txt_and_png
+#from src.main.python.util import delete_txt_and_png
 
 
 class TestUtil(unittest.TestCase):
     def test_dir_is_empty_after_delete_method(self):
+        from src.main.python.util import delete_txt_and_png
         delete_txt_and_png()
         self.assertTrue(not item.endswith(".png") and not item.endswith(".txt")for item in os.listdir('.'))
 
