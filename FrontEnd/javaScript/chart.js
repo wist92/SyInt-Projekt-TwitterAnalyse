@@ -13,6 +13,7 @@ function HichartStad(){
                          nameland.push(name);
                          valeurhastag.push(parseFloat(JSON.stringify(dataObject[i]['ftCount'])));
                      }
+                     chartload(nameland,valeurhastag);
                     console.log(nameland);
                     console.log(valeurhastag);
 
@@ -20,24 +21,25 @@ function HichartStad(){
                     console.log("Status de la réponse: %d (%s)", this.status, this.statusText);
                 }
             }
+
+
         };
 
         req.open('GET', 'https://1ethmtokja.execute-api.us-west-2.amazonaws.com/ApiLocation', true);
         req.send(null);
 
-
-
-        var canvas = document.getElementById('barChart');
+    function chartload(land,valeu) {
+              var canvas = document.getElementById('barChart');
         var ctxB = canvas.getContext('2d');
         var myBarChart = new Chart(ctxB, {
               type: 'bar',
               data: {
                 //labels: ["Berlin", "Paris", "NewYork", "Yaounde", "Syngapur", "Changai"],
-                  labels: nameland,
+                  labels: land,
                 datasets: [{
                     label: 'Ursprungliche Länder',
                     //data: [500, 700, 250, 100, 50, 96],
-                    data: valeurhastag,
+                    data: valeu,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -68,4 +70,6 @@ function HichartStad(){
               }
 
         });
+
+    }
     }
