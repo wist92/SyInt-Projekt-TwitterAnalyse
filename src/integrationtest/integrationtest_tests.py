@@ -1,6 +1,6 @@
 import unittest
 import os.path
-from src.main.python.util import delete_txt_and_png
+from util import delete_txt_and_png
 
 
 class TestUtil(unittest.TestCase):
