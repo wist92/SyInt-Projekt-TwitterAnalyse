@@ -2,6 +2,7 @@ import json
 import pandas as pd
 import matplotlib.pyplot as plt
 from src.main.python.s3_util import push_to_s3
+from src.main.python.dbHandler import *
 
 
 def import_twitter_data(path):
@@ -79,6 +80,13 @@ def extract_data(path_to_json_file):
         tweets_by_hashtag[:5].plot(ax=ax, kind='bar', color='blue')
     plt.tight_layout()
     plt.savefig(path_to_json_file + '_top_hashtags.png')
+
+    # Push most used Hashtag and Country to DB
+    print("Writing into database...")
+    db = dbHandler()
+    db.setData(session=path_to_json_file, hashtag=tweets_by_hashtag[0], location=tweets_by_country[0])
+    db.getAll()
+    db.closeConn()
 
     print("Pushing files to S3...")
     return push_to_s3(path_to_json_file + '_top_languages.png', path_to_json_file + '_top_countries.png',
