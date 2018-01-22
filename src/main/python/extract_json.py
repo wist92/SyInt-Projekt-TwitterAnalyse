@@ -84,7 +84,7 @@ def extract_data(path_to_json_file):
     # Push most used Hashtag and Country to DB
     print("Writing into database...")
     db = dbHandler()
-    db.setData(session=path_to_json_file, hashtag=tweets_by_hashtag[0], location=tweets_by_country[0])
+    db.setData(session=str(path_to_json_file), hashtag=str(tweets_by_hashtag.index[0]), location=str(tweets_by_country.index[0]))
     db.getAll()
     db.closeConn()
 
