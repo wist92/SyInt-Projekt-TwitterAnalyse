@@ -55,16 +55,16 @@ class dbHandler():
   # maxKeys = [k for k, v in dic.items() if v == maxVal]
   #  print("Anzahl: " + str(maxVal) + " Länder: " + str(maxKeys))
 
-  def main():
-    print("Daten vor Insert:")
-    x = dbHandler()
-    x.getAll()
-    print("Daten nach Insert:")
-    x.setData("003", "Pudding", "Ireland")
-    x.getAll()
+  #def main():
+  #  print("Daten vor Insert:")
+  #  x = dbHandler()
+  #  x.getAll()
+  #  print("Daten nach Insert:")
+  #  x.setData("003", "Pudding", "Ireland")
+  #  x.getAll()
     #x.getMaxLocation()
 
-    x.closeConn()
+  #  x.closeConn()
 
-  if __name__ == "__main__":
-    main()
+  #if __name__ == "__main__":
+  #  main()
