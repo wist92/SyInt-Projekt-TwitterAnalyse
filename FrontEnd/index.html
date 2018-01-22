@@ -18,6 +18,7 @@
     <script src='javaScript/Chart.min.js'></script>
     <script src="javaScript/chart.js"></script>
     <script src="javaScript/hashtag.js"></script>
+    <script src="FrontEnd/javaScript/posttoserver.js"></script>
     <script>
 
     </script>
@@ -39,15 +40,15 @@
     <div class="container">
         <br/>
         <br/>
-      <!-- Page Heading -->
-        <button class="btn btn-primary btn-lg" type="submit"  onClick = "HichartStad();Hicharthashtag()">Load</button>
+      <!-- Page Heading
+        <button class="btn btn-primary btn-lg" type="submit"  onClick = "HichartStad();Hicharthashtag()">Load</button>-->
         <br/>
         <br/>
-         <form method="POST" action="/">
+         <form method="GET" action="http://ec2-54-157-225-125.compute-1.amazonaws.com/twitter">
               Zeit der Analyse:<br>
               <input type="text" name="time"><br>
              <br/>
-             <button class="btn btn-primary btn-lg" type="submit" onclick="sendToServer()">click</button>
+             <button class="btn btn-primary btn-lg" type="submit" onclick="sendToServer()">submit</button>
          </form>
         <div class="">
           <canvas id="barChart" width="600" height="100"></canvas>
