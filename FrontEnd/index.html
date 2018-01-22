@@ -43,9 +43,11 @@
         <button class="btn btn-primary btn-lg" type="submit"  onClick = "HichartStad();Hicharthashtag()">Load</button>
         <br/>
         <br/>
-         <form>
+         <form method="POST" action="/">
               Zeit der Analyse:<br>
               <input type="text" name="time"><br>
+             <br/>
+             <button class="btn btn-primary btn-lg" type="submit" onclick="sendToServer()">click</button>
          </form>
         <div class="">
           <canvas id="barChart" width="600" height="100"></canvas>
