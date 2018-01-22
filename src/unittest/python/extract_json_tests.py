@@ -2,7 +2,7 @@ import unittest
 import os.path
 import mockito
 import pandas
-from src.main.python.extract_json import import_twitter_data,create_plot
+from src.main.python.extract_json import import_twitter_data, create_plot
 
 
 class TestJsonExtracting(unittest.TestCase):
