@@ -40,6 +40,17 @@ def create_plot(tweets_series,title, path):
     plt.savefig(file_name)
 
 
+def extract_hashtags(tweets_data):
+    hashtags = pd.DataFrame()
+    tags = list()
+    for tweet in tweets_data:
+        g = tweet.get('entities')['hashtags']
+        for hashtag in g:
+            tags.append(hashtag['text'])
+    hashtags['tags'] = [tag for tag in tags]
+    return hashtags
+
+
 def extract_data(path_to_json_file):
     tweets_data = import_twitter_data('twitter_data_' + path_to_json_file + '.txt')
 
@@ -49,14 +60,7 @@ def extract_data(path_to_json_file):
     tweets['country'] = [tweet.get('place', '')['country'] if tweet.get('place') is not None else None
                          for tweet in tweets_data]
 
-    hashtags = pd.DataFrame()
-    tags = list()
-    for tweet in tweets_data:
-        g = tweet.get('entities')['hashtags']
-        for hashtag in g:
-            tags.append(hashtag['text'])
-
-    hashtags['tags'] = [tag for tag in tags]
+    hashtags = extract_hashtags(tweets_data)
 
     tweets_by_lang = tweets['lang'].value_counts()
     tweets_by_hashtag = hashtags['tags'].value_counts()
