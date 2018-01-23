@@ -9,6 +9,11 @@ from twittercode.extract_json import extract_data
 from twittercode.util import delete_txt_and_png
 
 
+@route('/health')
+def health_check():
+    return 'Hello %s! I am good!' % request.params['name']
+
+
 @route('/twitter')
 def twitter():
     sampling_time = int(request.query.time)
