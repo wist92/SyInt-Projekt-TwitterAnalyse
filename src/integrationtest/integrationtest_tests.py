@@ -1,13 +1,9 @@
-import os.path
 import unittest
-
-from twittercode.util import delete_txt_and_png
 
 
 class TestUtil(unittest.TestCase):
-    def test_dir_is_empty_after_delete_method(self):
-        delete_txt_and_png()
-        self.assertTrue(not item.endswith(".png") and not item.endswith(".txt")for item in os.listdir('.'))
+    def definitely_not_a_useful_integration_test(self):
+        self.assertFalse(1 + 1 == 5)
 
 
 if __name__ == '__main__':
