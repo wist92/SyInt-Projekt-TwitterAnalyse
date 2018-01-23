@@ -12,6 +12,6 @@ default_task = "publish"
 
 @init
 def initialize(project):
-    project.include_file('unittest.python', 'twitter_data.txt')
+    project.include_file('src/unittest/python', 'twitter_data.txt')
     project.set_property("coverage_break_build", False)
     project.build_depends_on('mockito');
