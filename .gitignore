@@ -6,4 +6,4 @@ target
 tcl
 pip-selfcheck.json
 .coverage
-.idea
+.idea.dea
