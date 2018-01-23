@@ -66,11 +66,12 @@ def extract_data(path_to_json_file):
     # Push most used Hashtag and Country to DB
     print("Writing into database...")
     from src.main.python.dbHandler import dbHandler
-
-    db = dbHandler()
-    db.setData(session=str(path_to_json_file), hashtag=str(tweets_by_hashtag.index[0]), location=str(tweets_by_country.index[0]))
-    db.getAll()
-    db.closeConn()
+    try:
+        db = dbHandler()
+        db.setData(session=str(path_to_json_file), hashtag=str(tweets_by_hashtag.index[0]), location=str(tweets_by_country.index[0]))
+        db.getAll()
+    except UnicodeEncodeError as e:
+        print(e)
 
     print("Pushing files to S3...")
     return push_to_s3(path_to_json_file + '_top_languages.png', path_to_json_file + '_top_countries.png',

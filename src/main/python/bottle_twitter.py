@@ -30,9 +30,6 @@ def twitter():
                 }
 
         return template('result_vorlage.tpl', info)
-    except UnicodeEncodeError as e:
-        delete_txt_and_png()
-        return 'Most found Hashtag couldn\'t be written into database.'
     except TypeError as e:
         delete_txt_and_png()
         return 'Analysis time was too short to find hashtags, countries or languages in TwitterSampleStream.'
